@@ -7,7 +7,7 @@ import OrderItem from '../../../../domain/checkout/entity/order_item';
 export default class OrderRepository implements OrderRepositoryInterface {
     async find(id: string): Promise<Order> {
         const orderModel = await OrderModel.findOne({ where: { id }, include: ["items"] });
-        const orderItemModel = orderModel.items.map(item => new OrderItem(item.id, item.name, item.price, item.totalPrice, item.product_id, item.quantity));
+        const orderItemModel = orderModel.items.map(item => new OrderItem(item.id, item.name, item.price, item.product_id, item.quantity));
         const order = new Order(orderModel.id, orderModel.customer_id, orderItemModel)
         return order;
     }
@@ -15,7 +15,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
     async findAll(): Promise<Order[]> {
         const orderModels = await OrderModel.findAll();
         return orderModels.map((orderModel) => {
-            const orderItemModel = orderModel.items.map(item => new OrderItem(item.id, item.name, item.price, item.totalPrice, item.product_id, item.quantity));
+            const orderItemModel = orderModel.items.map(item => new OrderItem(item.id, item.name, item.price, item.product_id, item.quantity));
             return new Order(orderModel.id, orderModel.customer_id, orderItemModel);
             }
         );

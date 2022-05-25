@@ -48,16 +48,15 @@ describe("Order repository test", () => {
     await productRepository.create(product);
 
     const orderItemQuantity = 2;
-    const ordemItem = new OrderItem(
+    const orderItem = new OrderItem(
       "1",
       product.name,
       product.price,
-      product.price * orderItemQuantity,
       product.id,
-        orderItemQuantity
+      orderItemQuantity
     );
 
-    const order = new Order("123", "123", [ordemItem]);
+    const order = new Order("123", "123", [orderItem]);
 
     const orderRepository = new OrderRepository();
     await orderRepository.create(order);
@@ -73,11 +72,11 @@ describe("Order repository test", () => {
       total: order.total(),
       items: [
         {
-          id: ordemItem.id,
-          name: ordemItem.name,
-          price: ordemItem.price,
-          totalPrice: ordemItem.totalPrice,
-          quantity: ordemItem.quantity,
+          id: orderItem.id,
+          name: orderItem.name,
+          price: orderItem.price,
+          totalPrice: orderItem.totalPrice,
+          quantity: orderItem.quantity,
           order_id: "123",
           product_id: "123",
         },
@@ -100,7 +99,6 @@ describe("Order repository test", () => {
         "1",
         product.name,
         product.price,
-        product.price * orderItemQuantity,
         product.id,
         orderItemQuantity
     );
@@ -147,7 +145,6 @@ describe("Order repository test", () => {
         "2",
         product2.name,
         product2.price,
-        product2.price * orderItem2Quantity,
         product2.id,
         orderItem2Quantity
     );
@@ -199,7 +196,6 @@ describe("Order repository test", () => {
         "1",
         product.name,
         product.price,
-        product.price * orderItemQuantity,
         product.id,
         orderItemQuantity
     );
@@ -250,7 +246,6 @@ describe("Order repository test", () => {
         "1",
         product.name,
         product.price,
-        product.price * ordemItem1Quantity,
         product.id,
         ordemItem1Quantity
     );
@@ -260,7 +255,6 @@ describe("Order repository test", () => {
         "2",
         product.name,
         product.price,
-        product.price * ordemItem2Quantity,
         product.id,
         ordemItem2Quantity
     );
@@ -270,7 +264,6 @@ describe("Order repository test", () => {
         "3",
         product.name,
         product.price,
-        product.price * ordemItem3Quantity,
         product.id,
         ordemItem3Quantity
     );
